@@ -33,6 +33,7 @@ exports.handler = async (event, context) => {
       .slice(-12)}`,
     BirthDate: decodeURIComponent(incomingDataObject.BirthDate),
     SendEmail: true,
+    MiddleName: `${incomingDataObject.HighSchool} - ${incomingDataObject.GraduationYear}` // this maps to the field "High School"
   });
 
   console.log('-----------------------');
