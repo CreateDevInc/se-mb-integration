@@ -1,4 +1,7 @@
-const mindBodyApi = require('./mindbody.js');
+const MindBodyApi = require('mindbody-node-client');
+const mindBodyApi = new MindBodyApi();
+
+// const mindBodyApi = require('./mindbody.js');
 
 exports.handler = async (event, context) => {
   console.log('-----------------------');
@@ -38,7 +41,7 @@ exports.handler = async (event, context) => {
   console.log('-----------------------');
 
   const createRequest = await mindBodyApi
-    .createClient(requestObject)
+    .AddOrUpdateClients(requestObject)
     .catch(e => {
       console.log('oops');
       console.log(e);

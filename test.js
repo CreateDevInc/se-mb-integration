@@ -1,4 +1,6 @@
-const mindBodyApi = require('./mindbody.js');
+// const MindBodyApi = require('./mindbody.js');
+const MindBodyApi = require('mindbody-node-client');
+const mindBodyApi = new MindBodyApi();
 
 const exampleClient = {
   FirstName: 'Jordins',
@@ -17,21 +19,28 @@ const exampleClient = {
 };
 
 (async function() {
-  // const createdClient = await mindBodyApi.createClient(client).catch(e => {
-  //   console.log('Something went wrong..');
-  //   console.log(e);
-  // });
-  const client = await mindBodyApi
-    .getClient({searchText: 'Jordins'})
-    .catch(e => {
-      console.log('Something went wrong..');
-      console.log(e);
-    });
-
-  console.log('got a client?');
-  console.log(JSON.stringify(client, null, 4));
-
+  // CREATE A CLIENT
+  //
+  // const createdClient = await mindBodyApi
+  //   .createClient(exampleClient)
+  //   .catch(e => {
+  //     console.log('Something went wrong..');
+  //     console.log(e);
+  //   });
   // console.log('Client created?');
   // console.log(JSON.stringify(createdClient, null, 4));
   // console.log(createdClient.AddOrUpdateClientsResult.Status);
+  // GET A CLIENT
+  //
+  const client = await mindBodyApi.GetClients().catch(e => {
+    console.log('Something went wrong..');
+    console.log(e);
+  });
+  console.log('got a client?');
+  console.log(JSON.stringify(client, null, 4));
+  // const siteAuthentication = await mindBodyApi.authenticateSite().catch(e => {
+  //   console.log('oops');
+  //   console.log(e);
+  // });
+  // console.log(JSON.stringify(siteAuthentication, null, 4));
 })();

@@ -7,8 +7,7 @@
     "node": ">= 0.6.15"
   },
   "dependencies": {
-    "dotenv": "^6.0.0",
-    "soap": "~0.4.7"
+    "mindbody-node-client": "^1.0.1"
   },
   "repository": {
     "type": "git",
