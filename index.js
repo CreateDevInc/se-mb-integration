@@ -3,6 +3,11 @@ const mindBodyApi = new MindBodyApi();
 
 // const mindBodyApi = require('./mindbody.js');
 
+function decode(str) {
+  return decodeURIComponent(str.replace(/\+/, '%20'));
+}
+
+
 exports.handler = async (event, context) => {
   console.log('-----------------------');
   console.log('Event Object:');
@@ -21,19 +26,19 @@ exports.handler = async (event, context) => {
   const incomingDataObject = event.body.split('&').reduce((agg, i) => {
     let obj = Object.assign({}, agg);
     const kv = i.split('=');
-    obj[kv[0]] = kv[1];
+    obj[kv[0]] = decode(kv[1].replace(/\+/g, '%20'));
     return obj;
   }, {});
 
   const requestObject = Object.assign({}, incomingDataObject, {
     ReferredBy: 'Other',
-    Username: `${incomingDataObject.Email}`,
+    Username: `${decode(incomingDataObject.Email)}`,
     Password: `${Math.random()
       .toString(36)
       .slice(-12)}`,
-    BirthDate: decodeURIComponent(incomingDataObject.BirthDate),
+    BirthDate: decode(incomingDataObject.BirthDate),
     SendEmail: true,
-    MiddleName: `${incomingDataObject.HighSchool} - ${incomingDataObject.GraduationYear}` // this maps to the field "High School"
+    MiddleName: `${decode(incomingDataObject.HighSchool)} - ${decode(incomingDataObject.GraduationYear)}` // this maps to the field "High School"
   });
 
   console.log('-----------------------');
